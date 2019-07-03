@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent"
+    tools:context=".StartActivity">
+
+    <TextView
+        android:id="@+id/start_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="100dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="Attendance \n     Manager"
+        android:textColor="#000000"
+        android:textStyle="normal"
+        android:textSize="40sp" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_title"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="350dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:text="Already Have Account"
+        android:backgroundTint="#00a651"
+        android:elevation="3dp"
+        android:textColor="#ffffff"
+        android:id="@+id/start_login"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_login"
+        android:layout_centerInParent="true"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:elevation="30dp"
+        android:backgroundTint="#ffffff"
+        android:text="Need a new Account"
+        android:id="@+id/start_create"/>
+
+</RelativeLayout>

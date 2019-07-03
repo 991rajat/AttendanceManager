@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/adamina</item>
+        <item>@font/cinzel</item>
+        <item>@font/faster_one</item>
+        <item>@font/jacques_francois_shadow</item>
+        <item>@font/lobster</item>
+    </array>
+</resources>
