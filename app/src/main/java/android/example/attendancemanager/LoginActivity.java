@@ -1,16 +1,25 @@
 package android.example.attendancemanager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toolbar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputLayout email,password;
+    TextView create;
+
     Button submit;
     Toolbar toolbar;
 
@@ -22,17 +31,27 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.login_email);
         password = findViewById(R.id.login_password);
         submit = findViewById(R.id.login);
-        setActionBar(toolbar);
-        getActionBar().setTitle("Log In");
-        //BACK button not working
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        create = findViewById(R.id.login_create);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Sign In");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!validate())
+                if(validate())
                 {
-
+                    Toast.makeText(LoginActivity.this, "VALID", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Intent intent  = new Intent(LoginActivity.this,RegisterActivity.class);
+               // startActivity(intent);
             }
         });
     }
@@ -40,7 +59,28 @@ public class LoginActivity extends AppCompatActivity {
     boolean validate()
     {
         // Validation Required
-        return true;
+        boolean vali=true;
+        if(!isEmail((TextInputEditText) email.getEditText()))
+        {
+            email.getEditText().setError("Enter Valid Email Address.");
+            email.getEditText().requestFocus();
+            vali = false;
+        }
+        if(isEmpty((TextInputEditText)password.getEditText())||password.getEditText().getText().length()<6)
+        {
+            password.getEditText().setError("Password must be 6 character long.");
+            password.getEditText().requestFocus();
+        }
+        return vali;
+    }
 
+    boolean isEmail(TextInputEditText text) {
+        CharSequence email = text.getText().toString();
+        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    }
+
+    boolean isEmpty(TextInputEditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
     }
 }
