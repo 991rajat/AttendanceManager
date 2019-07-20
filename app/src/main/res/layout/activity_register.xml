@@ -7,13 +7,12 @@
     android:background="#ffffff"
     android:orientation="vertical"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
 
-        <include
-            android:id="@+id/login_toolbar"
-            layout="@layout/toolbar"></include>
-
+    <include
+        android:id="@+id/register_toolbar"
+        layout="@layout/toolbar"></include>
 
 
     <ScrollView
@@ -40,7 +39,7 @@
                 android:textStyle="normal" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/login_email"
+                android:id="@+id/register_email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +61,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/login_password"
+                android:id="@+id/register_password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,6 +83,29 @@
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_confirm_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                app:boxCornerRadiusBottomStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                app:boxCornerRadiusTopStart="30dp"
+
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="30dp"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -92,7 +114,7 @@
 
 
                 <Button
-                    android:id="@+id/login"
+                    android:id="@+id/register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_style"
@@ -100,7 +122,7 @@
                     android:paddingTop="10dp"
                     android:paddingEnd="40dp"
                     android:paddingBottom="10dp"
-                    android:text="Log In"
+                    android:text="Sign Up"
                     android:textColor="#ffffff"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -112,12 +134,11 @@
                 android:gravity="center">
 
                 <TextView
-                    android:id="@+id/login_create"
+                    android:id="@+id/register_login"
                     android:layout_width="wrap_content"
-
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed-light"
-                    android:text="No account yet? Create one"
+                    android:text="Already have an account?"
                     android:textAlignment="center"
                     android:textColor="#000"
                     android:textSize="19sp" />

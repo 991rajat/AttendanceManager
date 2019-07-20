@@ -6,54 +6,52 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class LoginActivity extends AppCompatActivity {
-    private TextInputLayout email,password;
-    TextView create;
 
+public class RegisterActivity extends AppCompatActivity {
+
+    private Toolbar toolbar;
+    private TextView already;
+    private TextInputLayout email,password,confirm;
     private Button submit;
-    Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        toolbar = (Toolbar) findViewById(R.id.login_toolbar);
-        email = findViewById(R.id.login_email);
-        password = findViewById(R.id.login_password);
-        submit = findViewById(R.id.login);
-        create = findViewById(R.id.login_create);
-
+        setContentView(R.layout.activity_register);
+        toolbar = findViewById(R.id.register_toolbar);
+        already = findViewById(R.id.register_login);
+        email = findViewById(R.id.register_email);
+        password = findViewById(R.id.register_password);
+        confirm = findViewById(R.id.register_confirm_password);
+        submit = findViewById(R.id.register);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Sign In");
+        getSupportActionBar().setTitle("Sign Up");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        already.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+            }
+        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validate())
+                if(!validate())
                 {
-                    Toast.makeText(LoginActivity.this, "VALID", Toast.LENGTH_SHORT).show();
+                    Log.d("YEAH","YEAH");
                 }
             }
         });
 
-        create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent  = new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     boolean validate()
@@ -69,6 +67,11 @@ public class LoginActivity extends AppCompatActivity {
         if(isEmpty((TextInputEditText)password.getEditText())||password.getEditText().getText().length()<6)
         {
             password.getEditText().setError("Password must be 6 character long.");
+            password.getEditText().requestFocus();
+        }
+        if(!confirm.getEditText().getText().toString().equals(password.getEditText().getText().toString()))
+        {
+            confirm.getEditText().setError("Password didn't match.");
             password.getEditText().requestFocus();
         }
         return vali;
