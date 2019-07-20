@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         {
             password.getEditText().setError("Password must be 6 character long.");
             password.getEditText().requestFocus();
+            vali = false;
         }
         return vali;
     }

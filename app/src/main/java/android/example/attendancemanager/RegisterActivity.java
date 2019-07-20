@@ -1,8 +1,10 @@
 package android.example.attendancemanager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,10 +12,16 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -22,6 +30,8 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView already;
     private TextInputLayout email,password,confirm;
     private Button submit;
+    private FirebaseAuth mAuth;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.register_password);
         confirm = findViewById(R.id.register_confirm_password);
         submit = findViewById(R.id.register);
+        mAuth  = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Sign Up");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -45,9 +57,33 @@ public class RegisterActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!validate())
+
+                if(validate())
                 {
-                    Log.d("YEAH","YEAH");
+                    progressDialog.setTitle("Registering User");
+                    progressDialog.setMessage("Hold it ryt there sparky!");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+                    final String name = email.getEditText().getText().toString();
+                    final String pass = password.getEditText().getText().toString();
+                    mAuth.createUserWithEmailAndPassword(name,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful())
+                            {
+                                progressDialog.dismiss();
+                                Toast.makeText(RegisterActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                                Log.d("register",name+pass);
+                                startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                            }
+                            else
+                            {
+                                progressDialog.dismiss();
+                                Log.d("registernot",name+pass);
+                                Toast.makeText(RegisterActivity.this, "Something got wrong! Try again.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -66,13 +102,15 @@ public class RegisterActivity extends AppCompatActivity {
         }
         if(isEmpty((TextInputEditText)password.getEditText())||password.getEditText().getText().length()<6)
         {
-            password.getEditText().setError("Password must be 6 character long.");
             password.getEditText().requestFocus();
+            password.getEditText().setError("Password must be 6 character long.");
+            vali = false;
         }
         if(!confirm.getEditText().getText().toString().equals(password.getEditText().getText().toString()))
         {
-            confirm.getEditText().setError("Password didn't match.");
             password.getEditText().requestFocus();
+            confirm.getEditText().setError("Password didn't match.");
+            vali = false;
         }
         return vali;
     }
