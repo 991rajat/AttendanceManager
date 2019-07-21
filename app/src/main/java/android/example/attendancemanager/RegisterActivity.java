@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,13 +23,17 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 
 public class RegisterActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView already;
-    private TextInputLayout email,password,confirm;
+    private TextInputLayout email,password,confirm,naam;
     private Button submit;
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
@@ -38,9 +43,11 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         toolbar = findViewById(R.id.register_toolbar);
         already = findViewById(R.id.register_login);
+        naam = findViewById(R.id.register_name);
         email = findViewById(R.id.register_email);
         password = findViewById(R.id.register_password);
         confirm = findViewById(R.id.register_confirm_password);
+
         submit = findViewById(R.id.register);
         mAuth  = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
@@ -53,7 +60,6 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
             }
         });
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,10 +77,10 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {
-                                progressDialog.dismiss();
+                                Mytask mytask = new Mytask();
+                                mytask.execute(naam.getEditText().getText().toString().trim());
                                 Toast.makeText(RegisterActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                                 Log.d("register",name+pass);
-                                startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                             }
                             else
                             {
@@ -123,5 +129,32 @@ public class RegisterActivity extends AppCompatActivity {
     boolean isEmpty(TextInputEditText text) {
         CharSequence str = text.getText().toString();
         return TextUtils.isEmpty(str);
+    }
+
+    public class Mytask extends AsyncTask<String,Void,Boolean> {
+
+        private FirebaseDatabase database;
+        private DatabaseReference myref;
+        private String UID;
+
+        @Override
+        protected Boolean doInBackground(String... strings) {
+            database = FirebaseDatabase.getInstance();
+            UID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+            Log.d("UID",UID);
+            myref = database.getReference();
+            HashMap<String,String> map = new HashMap<>();
+            Log.d("UID",UID);
+            Log.d("UID",strings[0]);
+            map.put("name",strings[0]);
+            myref.child("Users").child(UID).setValue(map);
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            progressDialog.dismiss();
+            startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+        }
     }
 }

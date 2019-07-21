@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:theme="@style/main_toolbar_theme"
+        android:id="@+id/maintoolbar"
+        android:layout_height="wrap_content"
+        app:titleTextColor="#ffffff"
+        android:layout_width="match_parent"></androidx.appcompat.widget.Toolbar>
+
+    <include layout="@layout/mainview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        ></include>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

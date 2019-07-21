@@ -5,6 +5,7 @@
     <item android:title="Sign Out"
         android:id="@+id/signout"
         app:showAsAction="always"
+
         >
     </item>
 

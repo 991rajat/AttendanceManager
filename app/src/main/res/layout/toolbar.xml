@@ -2,8 +2,6 @@
 
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:theme="@style/toolbar_theme"
-
-    android:orientation="vertical">
+    android:theme="@style/toolbar_theme">
 
 </androidx.appcompat.widget.Toolbar>
