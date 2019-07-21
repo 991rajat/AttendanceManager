@@ -1,12 +1,14 @@
 package android.example.attendancemanager.RecyclerAdapter;
 
 import android.content.Context;
+import android.example.attendancemanager.MainActivity;
 import android.example.attendancemanager.Model.UsersSubject;
 import android.example.attendancemanager.R;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import static java.lang.Math.ceil;
+import static java.lang.StrictMath.abs;
 
 public class RecyclerSubjectAdapter extends RecyclerView.Adapter<RecyclerSubjectAdapter.MyViewHolder> {
 
@@ -35,12 +40,27 @@ public class RecyclerSubjectAdapter extends RecyclerView.Adapter<RecyclerSubject
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.subject.setText(arrayList.get(position).getSubjectname());
         holder.attendance.setText("  "+String.valueOf(arrayList.get(position).getPresent())+"/"+String.valueOf(arrayList.get(position).getTotal()));
-        holder.percentage.setText(String.valueOf(arrayList.get(position).getPercentage())+" %");
+        holder.percentage.setText(String.valueOf((double) Math.round(arrayList.get(position).getPercentage() * 100) / 100)+" %");
         holder.status.setText("  "+arrayList.get(position).getStatus());
+        holder.incre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                update(1,arrayList.get(position));
+            }
+        });
+
+        holder.decre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                update(-1,arrayList.get(position));
+            }
+        });
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -50,14 +70,32 @@ public class RecyclerSubjectAdapter extends RecyclerView.Adapter<RecyclerSubject
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView attendance, subject, percentage,status;
+        protected ImageButton incre,decre;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             attendance = itemView.findViewById(R.id.row_attendance_value);
             subject = itemView.findViewById(R.id.row_subject_name);
             percentage = itemView.findViewById(R.id.row_percentage);
             status = itemView.findViewById(R.id.row_status_value);
+            incre = itemView.findViewById(R.id.row_add);
+            decre = itemView.findViewById(R.id.row_remove);
         }
     }
 
 
+    private void update(int x,UsersSubject particular) {
+        particular.setTotal(particular.getTotal()+abs(x));
+        if(x>0)
+        particular.setPresent(particular.getPresent()+x);
+        int pres,tot;
+        pres = particular.getPresent();
+        tot = particular.getTotal();
+        double value  = ((double)pres/tot);
+        if(value<0.75)
+            particular.setStatus("Attend "+ String.valueOf((int)(ceil((double)(0.75*tot)-pres))) +" classes more.");
+        else
+            particular.setStatus("You are right on track");
+        particular.setPercentage(((double)pres/tot)*100);
+        notifyDataSetChanged();
+    }
 }

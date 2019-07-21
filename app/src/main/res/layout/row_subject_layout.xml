@@ -47,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_marginEnd="10dp"
             android:text="Fetch %"
             android:textColor="#000"
             android:textSize="20sp"
@@ -69,7 +70,7 @@
             android:layout_below="@+id/row_percentage"
             android:layout_toLeftOf="@+id/row_remove"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:id="@+id/row_add"
             android:background="@drawable/row_button_back"
             android:src="@drawable/ic_add_black_24dp" />

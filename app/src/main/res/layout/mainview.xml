@@ -26,8 +26,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Goal  "
-                android:id="@+id/goal"
+                android:text="Overall Attendance   "
+                android:id="@+id/overallattendance"
                 android:layout_alignParentLeft="true"
                 android:textColor="#000"
                 android:textSize="18sp"
@@ -37,11 +37,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/goal"
-                android:id="@+id/overallattendance"
+                android:layout_below="@+id/overallattendance"
+                android:id="@+id/goal"
                 android:textColor="#000"
                 android:textSize="18sp"
-                android:text="Overall Attendance  "/>
+                android:text="Goal "/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -57,16 +57,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/main_goal"
-                android:layout_toRightOf="@+id/goal"/>
+                android:id="@+id/main_overall_attendance"
+                android:layout_marginEnd="50dp"
+                android:layout_alignParentRight="true"
+                android:text="YOO"
+                android:textColor="#000"
+                android:textSize="25sp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/goal"
                 android:layout_marginTop="10dp"
-                android:id="@+id/main_overall_attendance"
-                android:layout_toRightOf="@+id/overallattendance"/>
+                android:id="@+id/maingoal"
+                android:layout_below="@+id/overallattendance"
+                android:layout_toRightOf="@+id/goal"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

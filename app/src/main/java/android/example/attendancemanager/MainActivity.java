@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,11 +39,14 @@ import static java.lang.Math.ceil;
 
 public class MainActivity extends AppCompatActivity implements addsubjectDialog.ExampleDialogListener {
 
+    private double answer=0;
+    private int goal=75;
     private Toolbar toolbar;
     private Button addsubject;
     private DatabaseReference mroot;
     private String UID;
     private RecyclerView recyclerView;
+    private TextView maingoal,mainoverall;
     private ArrayList<UsersSubject> subjectArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements addsubjectDialog.
         toolbar = findViewById(R.id.maintoolbar);
         addsubject = findViewById(R.id.main_add_subject);
         mroot = FirebaseDatabase.getInstance().getReference();
+        maingoal = findViewById(R.id.maingoal);
+        mainoverall = findViewById(R.id.main_overall_attendance);
         UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         recyclerView = findViewById(R.id.recyclersubjects);
         subjectArrayList = new ArrayList<>();
@@ -147,6 +153,8 @@ public class MainActivity extends AppCompatActivity implements addsubjectDialog.
                     UsersSubject usersSubject = new UsersSubject();
                     if(dataSnapshot1.getKey().equals("name")||dataSnapshot1.getKey().equals("goal")||dataSnapshot1.getKey().equals("overall"))
                         continue;
+                    if(dataSnapshot1.getKey().equals("goal"))
+                        goal = Integer.parseInt(dataSnapshot1.child("goal").getValue().toString());
                     usersSubject.setSubjectname(dataSnapshot1.getKey());
                     int present = Integer.parseInt(dataSnapshot1.child("present").getValue().toString());
                     int total = Integer.parseInt(dataSnapshot1.child("total").getValue().toString());
@@ -156,10 +164,12 @@ public class MainActivity extends AppCompatActivity implements addsubjectDialog.
                         usersSubject.setStatus("Attend "+ String.valueOf((int)(ceil((double)(0.75*total)-present))) +" classes more.");
                     else
                         usersSubject.setStatus("You are right on track");
+                    answer+=values;
                     usersSubject.setPresent(Integer.parseInt(dataSnapshot1.child("present").getValue().toString()));
                     usersSubject.setTotal(Integer.parseInt(dataSnapshot1.child("total").getValue().toString()));
                     subjectArrayList.add(usersSubject);
                 }
+                setGoalandOverall();
                 Log.d("Data fetch","YOOO");
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -173,4 +183,12 @@ public class MainActivity extends AppCompatActivity implements addsubjectDialog.
             }
         });
     }
+
+    void setGoalandOverall()
+    {
+        mainoverall.setText(String.valueOf((double) Math.round(((answer/subjectArrayList.size())*100)* 100) / 100)+" %");
+        maingoal.setText("  "+String.valueOf(goal)+ " %");
+    }
+
+
 }
