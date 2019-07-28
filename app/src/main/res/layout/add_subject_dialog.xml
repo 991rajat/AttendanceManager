@@ -3,15 +3,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
+    android:padding="20dp"
     android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:text="Add Subject"
+        android:fontFamily="sans-serif-condensed-light"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textSize="21sp"/>
     
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:paddingStart="70dp"
-        android:paddingEnd="70dp"
+        android:layout_margin="10dp"
+        android:maxLength="15"
+        android:paddingEnd="100dp"
         android:id="@+id/dialog_add_subject"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="Cancel"
+            android:id="@+id/cancelsubject"
+            android:textColor="#fff"
+            android:backgroundTint="@color/colorAccent"/>
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="OK"
+            android:id="@+id/addsubjectsubmmit"
+            android:textColor="#fff"
+            android:backgroundTint="@color/colorAccent"/>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

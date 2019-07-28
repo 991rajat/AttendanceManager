@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="25dp"
             android:text="Fetch %"
             android:textColor="#000"
             android:textSize="20sp"
@@ -98,6 +98,17 @@
             android:textStyle="bold"
             android:text="COOL"
             android:id="@+id/row_status_value" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="20sp"
+            android:text="&#8942;"
+            android:id="@+id/optionsmenu"/>
 
     </RelativeLayout>
 

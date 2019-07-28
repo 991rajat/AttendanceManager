@@ -22,7 +22,11 @@
             android:paddingStart="10dp"
             android:paddingBottom="10dp"
             >
-
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/cardprogress"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,22 +49,23 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:text="Add subject "
                 android:textColor="#fff"
                 android:backgroundTint="@color/colorAccent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:background="@drawable/button_style"
                 android:id="@+id/main_add_subject"
-                android:textSize="12sp"/>
+                android:textSize="10sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/main_overall_attendance"
-                android:layout_marginEnd="50dp"
+                android:layout_marginEnd="20dp"
                 android:layout_alignParentRight="true"
-                android:text="YOO"
+                android:text="Fetching Wait!!"
                 android:textColor="#000"
                 android:textSize="25sp"
                 />
@@ -70,18 +75,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:id="@+id/maingoal"
+                android:textSize="18sp"
                 android:layout_below="@+id/overallattendance"
                 android:layout_toRightOf="@+id/goal"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-
-    <androidx.recyclerview.widget.RecyclerView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="100dp"
         android:layout_height="match_parent"
-        android:id="@+id/recyclersubjects"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginTop="100dp"
+        android:id="@+id/framelayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclersubjects"></androidx.recyclerview.widget.RecyclerView>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/progress_circular"/>
+    </FrameLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

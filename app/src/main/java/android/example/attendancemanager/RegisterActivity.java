@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -77,6 +78,8 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {
+                                SharedPreferences pref = getSharedPreferences("firsttime",MODE_PRIVATE);
+                                pref.edit().putBoolean("firsttimeronly",true).commit();
                                 Mytask mytask = new Mytask();
                                 mytask.execute(naam.getEditText().getText().toString().trim());
                                 Toast.makeText(RegisterActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
@@ -86,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                             {
                                 progressDialog.dismiss();
                                 Log.d("registernot",name+pass);
-                                Toast.makeText(RegisterActivity.this, "Something got wrong! Try again.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Something got wrong! Try again. Or User Already Present", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -143,10 +146,11 @@ public class RegisterActivity extends AppCompatActivity {
             UID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
             Log.d("UID",UID);
             myref = database.getReference();
-            HashMap<String,String> map = new HashMap<>();
-            Log.d("UID",UID);
-            Log.d("UID",strings[0]);
+            HashMap<String,Object> map = new HashMap<>();
             map.put("name",strings[0]);
+            map.put("goal",0);
+            map.put("overall",0);
+
             myref.child("Users").child(UID).setValue(map);
             return true;
         }

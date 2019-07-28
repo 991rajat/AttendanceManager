@@ -6,6 +6,8 @@ public class UsersSubject {
     private int present;
     private double percentage;
     private String status;
+    private int goal;
+    private double overall;
 
     public String getSubjectname() {
         return subjectname;
@@ -45,5 +47,21 @@ public class UsersSubject {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getGoal() {
+        return goal;
+    }
+
+    public void setGoal(int goal) {
+        this.goal = goal;
+    }
+
+    public double getOverall() {
+        return overall;
+    }
+
+    public void setOverall(double overall) {
+        this.overall = overall;
     }
 }

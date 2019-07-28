@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditAttendance">
+
+    <androidx.appcompat.widget.Toolbar
+        android:theme="@style/main_toolbar_theme"
+        android:id="@+id/edittoolbar"
+        android:layout_height="wrap_content"
+        app:titleTextColor="#ffffff"
+        android:layout_width="match_parent"></androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:text="Subject Name : "
+            android:fontFamily="sans-serif-condensed-light"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:padding="10dp"
+            android:id="@+id/edittextsubject"></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:text="Class Attended : "
+            android:fontFamily="sans-serif-condensed-light"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:layout_below="@+id/edittextsubject"
+            android:padding="10dp"
+            android:id="@+id/edittextpresent"></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:text="Total Classes: "
+            android:fontFamily="sans-serif-condensed-light"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:padding="10dp"
+            android:layout_below="@+id/edittextpresent"
+            android:id="@+id/edittexttotal"
+            android:paddingStart="20dp"></TextView>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:padding="10dp"
+            android:layout_toRightOf="@id/edittextsubject"
+            android:id="@+id/editsubject"
+            android:paddingStart="20dp"></EditText>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:padding="10dp"
+            android:layout_below="@+id/editsubject"
+            android:layout_toRightOf="@id/edittextpresent"
+            android:id="@+id/editpresent"
+            android:paddingStart="20dp"></EditText>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:padding="10dp"
+            android:layout_below="@id/editpresent"
+            android:layout_toRightOf="@id/edittexttotal"
+            android:id="@+id/edittotal"
+
+            android:paddingStart="20dp"></EditText>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edittotal"
+            android:id="@+id/editcancel"
+            android:text="Cancel"
+            android:textColor="#fff"
+            android:backgroundTint="@color/colorAccent"/>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/editcancel"
+            android:textColor="#fff"
+            android:text="OK"
+            android:id="@+id/editok"
+            android:layout_below="@id/edittotal"
+            android:backgroundTint="@color/colorAccent"/>
+        <!--<ProgressBar-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/editprogress"-->
+            <!--android:layout_centerInParent="true"/>-->
+
+    </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
