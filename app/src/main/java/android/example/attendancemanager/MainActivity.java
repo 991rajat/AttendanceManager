@@ -115,11 +115,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        otherfetch();
 
-            recyclerfetch();
     }
 
     private void otherfetch() {
@@ -147,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //Runs only one time for adding goal
         final SharedPreferences prefrence = getSharedPreferences("firsttime", Context.MODE_PRIVATE);
@@ -229,6 +227,9 @@ public class MainActivity extends AppCompatActivity {
 //        mroot.child("Users").child(UID).addListenerForSingleValueEvent(eventListener1);
 //        mgoallistner = eventListener1;
         moveralllistener = eventListener;
+        otherfetch();
+
+        recyclerfetch();
 
 
 
